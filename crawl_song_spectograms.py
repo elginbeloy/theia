@@ -77,7 +77,7 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
         error = driver.find_element_by_id('error').text
         if (error):
           print(f"{CRAWLER_INDICATOR} got an error: {error}")
-          continue
+          break
       except:
         try:
           download_button = driver.find_element_by_link_text('Download')
@@ -86,10 +86,13 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
         except:
           if conversion_time_seconds > 10:
             print(f"{CRAWLER_INDICATOR} Took too fucking long.")
-            continue
+            break
           print('Waiting on mp3 conversion...')
           conversion_time_seconds += 1
           time.sleep(1)
+
+    if not downloaded:
+      continue
 
     print('Waiting on mp3 download...')  
     time.sleep(5)
