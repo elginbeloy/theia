@@ -84,7 +84,7 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
           download_button.click()
           downloaded = True
         except:
-          if conversion_time_seconds > 10:
+          if conversion_time_seconds > 20:
             print(f"{CRAWLER_INDICATOR} Took too fucking long.")
             break
           print('Waiting on mp3 conversion...')
