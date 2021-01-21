@@ -1,2 +1,4 @@
 *.pyc
-save.txt
+chromedriver
+*.mp3
+*.jpg

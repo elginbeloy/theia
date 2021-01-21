@@ -71,7 +71,7 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
     convert_button.click()
     
     downloaded = False
-    conversion_time_seconds = 10
+    conversion_time_seconds = 0
     while not downloaded:
       try:
         error = driver.find_element_by_id('error').text
@@ -84,7 +84,7 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
           downloaded = True
         except:
           if conversion_time_seconds > 10:
-            continue
+            break
           print('Waiting on mp3 conversion...')
           conversion_time_seconds += 1
           time.sleep(1)
@@ -102,8 +102,8 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
 
     # Move the download to this folder and create spectogram
     print('Generating spectogram for song...')
-    os.rename(os.path.join('../Downloads', filename), f"./{normalized_name}__{normalized_artist}.mp3")
-    create_spectrogram(f'{normalized_name}__{normalized_artist}', f'./{normalized_name}__{normalized_artist}.mp3')
+    os.rename(os.path.join('../Downloads', filename), f"./songs/{normalized_name}__{normalized_artist}.mp3")
+    create_spectrogram(f'{normalized_name}__{normalized_artist}', f'./songs/{normalized_name}__{normalized_artist}.mp3')
     
 
   print(f"{CRAWLER_INDICATOR} Complete!")
