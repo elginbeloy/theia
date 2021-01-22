@@ -21,7 +21,15 @@ seed_urls = [
   'https://music.youtube.com/watch?v=IxJjY5T9yag',
   'https://music.youtube.com/watch?v=hHtv2XMZlKs',
   'https://music.youtube.com/watch?v=74QWd6b9byk',
-  'https://music.youtube.com/watch?v=FkXulkASrqc'
+  'https://music.youtube.com/watch?v=FkXulkASrqc',
+  'https://music.youtube.com/watch?v=QZ2F3ZP1sxg',
+  'https://music.youtube.com/watch?v=a0DJDF0uSek',
+  'https://music.youtube.com/watch?v=qkDqCSgbluI',
+  'https://music.youtube.com/watch?v=1RfvFri4XH4',
+  'https://music.youtube.com/watch?v=k5PO17AC3Kg',
+  'https://music.youtube.com/watch?v=KmN0-McUu3I',
+  'https://music.youtube.com/watch?v=e8HtwsnuTIw',
+  'https://music.youtube.com/watch?v=wku2PjKQcA4'
 ]
 
 song_paths = {
@@ -122,8 +130,8 @@ while recommendations < len(cosine_similarity_arr):
     
     affinity_value = cosine_similarity_arr[index]
     song_name = predictions_label[index].split('__')[0].replace('_', ' ').title()
-    if (len(label.split('__'))) > 1:
-      artist_name = label.split('__')[1].replace('_', ' ').title()
+    if (len(predictions_label[index].split('__'))) > 1:
+      artist_name = predictions_label[index].split('__')[1].replace('_', ' ').title()
     else:
       artist_name = colored("FIBONACCI4LOVE", "green")
       

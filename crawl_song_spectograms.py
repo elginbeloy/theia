@@ -52,10 +52,15 @@ def crawl_song_spectograms(seed_urls, PAGE_LOAD_WAIT_TIME=5):
 
   print("{CRAWLER_INDICATOR} Downloading crawled songs from ytmp3.cc...")
   for song_id, song in scrapped_songs.items():
-    # Go get the YT video URL for the song
-    driver.get(f"https://www.youtube.com/results?search_query={song['artist']} {song['name']}")
-    song['url'] = "https://www.youtube.com" + driver.find_element_by_id('video-title').get_attribute('href')
-    print(f"{CRAWLER_INDICATOR} URL scrapped for {song['name']} - {song['artist']} ({song['url']})")
+    try:
+      # Go get the YT video URL for the song
+      driver.get(f"https://www.youtube.com/results?search_query={song['artist']} {song['name']}")
+      song['url'] = "https://www.youtube.com" + driver.find_element_by_id('video-title').get_attribute('href')
+      print(f"{CRAWLER_INDICATOR} URL scrapped for {song['name']} - {song['artist']}: ")
+      print(colored(driver.find_element_by_id('video-title').get_attribute('href')), "blue")
+    except:
+      print(f"{CRAWLER_INDICATOR} Failed to scrape {song['name']} - {song['artist']}")
+      continue
 
     # Go pirate the mp3 
     driver.get('https://ytmp3.cc/en13/')
