@@ -7,7 +7,7 @@ Builds a list of recommended songs from MP3s by
 4. running a CNN trained to classify music genres but instead of classification we take the final output layer as a latent feature vector representing our song. we do this for 15 second samples.
 5. creating a ranked list based on the distance from the songs and our recommending MP3 file
 
-# Results (FIBONACCI4LOVE)
+## Results (FIBONACCI4LOVE)
 
 Below are the recommendation lists for 3 different FIBONACCI4LOVE songs. 
 Results are based on `1,350` different song samples. We show all of the 
@@ -19,8 +19,7 @@ highest ranked.
 
 > NOTE: More songs can be scrapped as needed later on.
 
-Dior:
-
+### Dior:
 ```
 Song: 2Tone - Barbie (Official Video) (2Tone) with affinity value of 0.9978736121645492
 Song: On Me (Lil Baby) with affinity value of 0.9972860799359465
@@ -32,7 +31,6 @@ Song: Woah (Lil Baby) with affinity value of 0.993166995097991
 Song: Cb So Easy (Prod By. Lfinguz) (@Chillimikevisuals) (The Official Cb) with affinity value of 0.9929144070688594
 Song: Baby (Quality Control, Lil Baby & Dababy) with affinity value of 0.9923556090479293
 Song: Ispy (Feat. Lil Yachty) (Kyle) with affinity value of 0.9908503159908967
-Song: Life Is Good (Official Music Video) (Feat. Drake) (Future) with affinity value of 0.9904984888880731
 Song: Life Is Good (Feat. Drake) (Future) with affinity value of 0.9904984879557077
 Song: Blueberry Faygo (Lil Mosey) with affinity value of 0.9901346842340575
 Song: Crazy Story (King Von) with affinity value of 0.9901180999577988
@@ -43,11 +41,26 @@ Song: Nothing To Lose (!!!FIBONACCI4LOVE!!!) with affinity value of 0.9883620691
 ```
 
 
-Nothing To Lose:
+### Nothing To Lose:
+```
+Song: Life Is Good (Feat. Drake) (Future) with affinity value of 0.9963661339549892
+Song: Suge (Dababy) with affinity value of 0.9956820906121026
+Song: Bop (Dababy) with affinity value of 0.9949073171589554
+Song: Walk (Feat. Lil Baby & 42 Dugg) (Rylo Rodriguez) with affinity value of 0.993219315529073
+Song: Free Woo (42 Dugg) with affinity value of 0.9930017600801024
+Song: Rockstar (Feat. Roddy Ricch) (Dababy) with affinity value of 0.9919531427853321
+Song: Woah (Lil Baby) with affinity value of 0.9919281164779267
+Song: Crazy Story (King Von) with affinity value of 0.9917400485788063
+Song: Wow. (Post Malone) with affinity value of 0.9904229057730609
+Song: 2Tone - Barbie (Official Video) (2Tone) with affinity value of 0.9902924324469711
+Song: On Me (Lil Baby) with affinity value of 0.9894633952760192
+Song: Cb So Easy (Prod By. Lfinguz) (@Chillimikevisuals) (The Official Cb) with affinity value of 0.9891990758885162
+Song: All Love (Lil Durk) with affinity value of 0.9890077620945179
+Song: Dior (FIBONACCI4LOVE) with affinity value of 0.9883620398480055 <------ First FIBONACCI4LOVE
+```
+
+### Dirty Laundry:
 
 ```
 
 ```
-
-Dirty Laundry:
-
