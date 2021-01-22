@@ -10,11 +10,18 @@ from keras.models import Model, load_model
 from create_spectogram import create_spectrogram
 from crawl_song_spectograms import crawl_song_spectograms
 import cv2
+from termcolor import colored
 
 seed_urls = [
   'https://music.youtube.com/watch?v=JFm7YDVlqnI',
   'https://music.youtube.com/watch?v=cDde7QlKCX0',
   'https://music.youtube.com/watch?v=U0AK2RXJTQM',
+  'https://music.youtube.com/watch?v=fHI8X4OXluQ',
+  'https://music.youtube.com/watch?v=GAEuJe8NDzc',
+  'https://music.youtube.com/watch?v=IxJjY5T9yag',
+  'https://music.youtube.com/watch?v=hHtv2XMZlKs',
+  'https://music.youtube.com/watch?v=74QWd6b9byk',
+  'https://music.youtube.com/watch?v=FkXulkASrqc'
 ]
 
 song_paths = {
@@ -34,8 +41,11 @@ loaded_model.set_weights(loaded_model.get_weights())
 matrix_size = loaded_model.layers[-2].output.shape[1]
 new_model = Model(loaded_model.inputs, loaded_model.layers[-2].output)
 
-# Create the spectograms from YoutubeMusic then load them.
-crawl_song_spectograms(seed_urls)
+user_input = input("Crawl Youtube Music? y/N: ")
+if user_input == 'y':
+  # Create the spectograms from YoutubeMusic then load them.
+  crawl_song_spectograms(seed_urls)
+
 filenames = [os.path.join("song_spectograms/", f) for f in os.listdir("song_spectograms") if "__slice-" in f]
 images, labels = [], []
 for f in filenames:
@@ -54,8 +64,16 @@ images = images / 255.
 # Display list of available songs for recommendation.
 song_options = []
 for index, label in enumerate(np.unique(labels)):
+  label_sections = label.split("__")
   song_options.append(label)
-  print(f"{index}. {label.split('__')[0].replace('_', ' ').title()} - {label.split('__')[1].replace('_', ' ').title()}")
+
+  output_str = f"{colored(index, 'blue')}. {label.split('__')[0].replace('_', ' ').title()}"
+  if (len(label_sections)) > 1:
+    output_str += " - " + colored(label.split('__')[1].replace('_', ' ').title(), "red")
+    print(output_str)
+  else:
+    output_str += " - " + colored("FIBONACCI4LOVE", "green")
+    print(output_str)
 
 recommend_wrt = song_options[int(input("Enter Song Number: "))]
 prediction_anchor = np.zeros((1, matrix_size))
@@ -99,12 +117,16 @@ cosine_similarity_arr = np.array(cosine_similarity_arr)
 
 print("Recommendations:")
 recommendations = 0
-while recommendations < 5:
+while recommendations < len(cosine_similarity_arr):
     index = np.argmax(cosine_similarity_arr)
     
     affinity_value = cosine_similarity_arr[index]
-    artist_name = predictions_label[index].split('__')[0].replace('_', ' ').title()
-    song_name = predictions_label[index].split('__')[1].replace('_', ' ').title()
+    song_name = predictions_label[index].split('__')[0].replace('_', ' ').title()
+    if (len(label.split('__'))) > 1:
+      artist_name = label.split('__')[1].replace('_', ' ').title()
+    else:
+      artist_name = colored("FIBONACCI4LOVE", "green")
+      
     print(f"Song: {song_name} ({artist_name}) with affinity value of {affinity_value}")
 
     cosine_similarity_arr[index] = -np.inf

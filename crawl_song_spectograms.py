@@ -13,9 +13,8 @@ CRAWLER_INDICATOR = colored("[C R A W L E R] ", 'green')
 
 # Crawl YoutubeMusic from seed URLs to create a list of potential 
 # recommendation songs. Download and convert this list to spectograms.
-def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
+def crawl_song_spectograms(seed_urls, PAGE_LOAD_WAIT_TIME=5):
   print(f"{CRAWLER_INDICATOR} Starting URL search with the following parameters:")
-  print(f"{CRAWLER_INDICATOR} Crawler Depth: {crawler_depth} videos")
   print(f"{CRAWLER_INDICATOR} Seed URLs: {seed_urls}")
   print(f"{CRAWLER_INDICATOR} Crawler Page Load: {PAGE_LOAD_WAIT_TIME}")
   print()
@@ -29,7 +28,6 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
   })
   driver = webdriver.Chrome('./chromedriver', options=chrome_options)
   print(f"{CRAWLER_INDICATOR} Complete!")
-  print(f"{CRAWLER_INDICATOR} Cycling through seed URLs with a depth of {crawler_depth}!")
   print()
 
   scrapped_songs = {}
@@ -44,7 +42,7 @@ def crawl_song_spectograms(seed_urls, crawler_depth=2, PAGE_LOAD_WAIT_TIME=5):
       recommended_song_elms = driver.find_elements_by_xpath(yt_music_recommended_song_xpath)
       for song_elm in recommended_song_elms:
         song_name = song_elm.find_element_by_xpath('.//yt-formatted-string[contains(@class, "song-title")]').text
-        artist_name = song_elm.find_element_by_xpath('.//yt-formatted-string[contains(@class, "byline")]').text
+        artist_name = song_elm.find_element_by_xpath('.//yt-formatted-string[contains(@class, "byline")]').text.replace("\n", "")
         song_id = song_name.replace(' ', '')
         if song_id and song_name and artist_name:
           scrapped_songs[song_id] = {'name': song_name, 'artist': artist_name}
