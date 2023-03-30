@@ -4,8 +4,8 @@ Builds a list of recommended songs from MP3s by
 1. crawling Youtube Music for potential songs
 2. downloading songs as MP3s
 3. creating mel-spectograms from said downloaded MP3s, 
-4. running a CNN trained to classify music genres but instead of classification we take the final output layer as a latent feature vector representing our song. we do this for 15 second samples.
-5. creating a ranked list based on the distance from the songs and our recommending MP3 file
+4. running a CNN trained to classify music genres but instead of classification we take the final output layer (prior to the softmax) and treat it as a latent feature vector representing our song.
+5. creating a ranked list based on the cosine similarity of the songs latent feature vector and the given Fibo song (using an average over 15 second samples from our recommending MP3 file)
 
 ## Results (FIBONACCI4LOVE)
 
